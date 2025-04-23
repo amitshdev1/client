@@ -25,8 +25,8 @@ const ProjectDetails = () => {
 
   const fetchProjectAndTasks = async () => {
     try {
-      const projectRes = await axios.get(`${process.env.REACT_APP_API_URL}/api/projects/${id}`)
-      const tasksRes = await axios.get(`${process.env.REACT_APP_API_URL}/api/projects/${id}/tasks`)
+      const projectRes = await axios.get(`https://server-coral-iota-70.vercel.app/api/projects/${id}`)
+      const tasksRes = await axios.get(`https://server-coral-iota-70.vercel.app/api/projects/${id}/tasks`)
 
       setProject(projectRes.data)
       setTasks(tasksRes.data)
@@ -40,7 +40,7 @@ const ProjectDetails = () => {
 
   const handleCreateTask = async (taskData) => {
     try {
-      const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/projects/${id}/tasks`, taskData)
+      const res = await axios.post(`https://server-coral-iota-70.vercel.app/api/projects/${id}/tasks`, taskData)
       setTasks([...tasks, res.data])
       setIsTaskModalOpen(false)
       toast.success("Task created successfully")
@@ -51,7 +51,7 @@ const ProjectDetails = () => {
 
   const handleUpdateTaskStatus = async (taskId, newStatus) => {
     try {
-      const res = await axios.put(`${process.env.REACT_APP_API_URL}/api/tasks/${taskId}`, { status: newStatus })
+      const res = await axios.put(`https://server-coral-iota-70.vercel.app/api/tasks/${taskId}`, { status: newStatus })
 
       setTasks(tasks.map((task) => (task._id === taskId ? { ...task, status: newStatus } : task)))
 
@@ -63,7 +63,7 @@ const ProjectDetails = () => {
 
   const handleDeleteTask = async (taskId) => {
     try {
-      await axios.delete(`${process.env.REACT_APP_API_URL}/api/tasks/${taskId}`)
+      await axios.delete(`https://server-coral-iota-70.vercel.app/api/tasks/${taskId}`)
       setTasks(tasks.filter((task) => task._id !== taskId))
       toast.success("Task deleted successfully")
     } catch (error) {
@@ -73,7 +73,7 @@ const ProjectDetails = () => {
 
   const handleDeleteProject = async () => {
     try {
-      await axios.delete(`${process.env.REACT_APP_API_URL}/api/projects/${id}`)
+      await axios.delete(`https://server-coral-iota-70.vercel.app/api/projects/${id}`)
       toast.success("Project deleted successfully")
       navigate("/dashboard")
     } catch (error) {

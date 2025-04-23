@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/login`, { email, password })
+      const res = await axios.post(`https://server-coral-iota-70.vercel.app/api/auth/login`, { email, password })
       const { token } = res.data
 
       localStorage.setItem("token", token)
@@ -61,7 +61,7 @@ export const AuthProvider = ({ children }) => {
 
   const signup = async (userData) => {
     try {
-      const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/register`, userData)
+      const res = await axios.post(`https://server-coral-iota-70.vercel.app/api/auth/register`, userData)
       toast.success("Registration successful! Please login.")
       return true
     } catch (error) {
@@ -80,7 +80,7 @@ export const AuthProvider = ({ children }) => {
 
   const updateProfile = async (userData) => {
     try {
-      const res = await axios.put(`${process.env.REACT_APP_API_URL}/api/users/profile`, userData)
+      const res = await axios.put(`https://server-coral-iota-70.vercel.app/api/users/profile`, userData)
 
       // Update user in state
       const token = localStorage.getItem("token")
@@ -103,7 +103,7 @@ export const AuthProvider = ({ children }) => {
 
   const changePassword = async (passwordData) => {
     try {
-      const res = await axios.put(`${process.env.REACT_APP_API_URL}/api/users/change-password`, passwordData)
+      const res = await axios.put(`https://server-coral-iota-70.vercel.app/api/users/change-password`, passwordData)
       toast.success("Password changed successfully")
       return true
     } catch (error) {
